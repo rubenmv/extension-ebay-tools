@@ -1,0 +1,21 @@
+{
+    "manifest_version": 2,
+    "name": "Ebay Force Domain",
+    "short_name": "Ebay Force Domain",
+    "description": "Forces a domain for item pages on Ebay.",
+    "version": "1.0.0",
+
+    "permissions": ["tabs"],
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+
+    "icons":
+    {
+        "128": "images/default-128.png",
+        "48": "images/default-48.png",
+        "24": "images/default-24.png"
+    },
+    "background": 
+    {
+        "scripts": ["background.js"]
+    }
+}
