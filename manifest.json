@@ -3,7 +3,7 @@
     "name": "Ebay Force Domain",
     "short_name": "Ebay Force Domain",
     "description": "Forces a domain for item pages on Ebay.",
-    "version": "1.0.0",
+    "version": "1.1.0",
 
     "permissions": ["tabs"],
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",

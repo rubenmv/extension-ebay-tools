@@ -1,3 +1,7 @@
-1.0 - 2018.11.01
+1.1.0 - 2018.11.04
+------------------
+- Restrict url checks to ebay domains.
+
+1.0.0 - 2018.11.01
 ------------------
 - Basic functionality.
