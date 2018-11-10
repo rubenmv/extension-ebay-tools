@@ -1,17 +1,21 @@
 const DEBUG = false;
-const EBAY_DOMAINS = [""];
 const REDIRECT_DOMAIN = "ebay.es";
+const HIDDEN_COUNTRIES = /(China|Hong Kong)/;
 
-var logger = function (message) {
+var logger = function (message)
+{
     if (DEBUG) console.log(message);
 }
 
-function CheckForDomain(url, domain) {
+function CheckForDomain(url, domain)
+{
     return url != undefined && url.hostname != undefined && url.hostname.indexOf(domain) >= 0;
 }
 
-chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
-    if (changeInfo.status !== "loading") return;
+function Redirect(tab)
+{
+    logger("-------- Redirect -------");
+
     logger("Cogemos el tab.\n" +
         "id: " + tab.id +
         ", url: " + tab.url);
@@ -20,12 +24,15 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
     // Primero comprobamos si ebay es parte del hostname
     if (!CheckForDomain(url, "ebay")) { logger("dominio no ebay, terminamos"); return; }
     logger("tab.url en formato URL: " + url);
-    if (url.href) {
+    if (url.href)
+    {
         logger("hostname: " + url.hostname);
         // No es el dominio que buscamos, redirigimos
-        if (!CheckForDomain(url, REDIRECT_DOMAIN)) {
+        if (!CheckForDomain(url, REDIRECT_DOMAIN))
+        {
             var itemPage = url.href.indexOf("itm") >= 0;
-            if (itemPage) {
+            if (itemPage)
+            {
                 logger("item page, redirecting");
                 const redirectURL = "http://" + REDIRECT_DOMAIN + url.pathname;
                 logger(redirectURL);
@@ -34,5 +41,14 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
                 });
             }
         }
+    }
+}
+
+chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab)
+{
+    // Primero comprobamos durante la carga si el dominio hay que redirigirlo
+    if (changeInfo.status === "loading")
+    {
+        Redirect(tab);
     }
 });

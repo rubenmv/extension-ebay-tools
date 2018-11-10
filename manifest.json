@@ -3,19 +3,22 @@
     "name": "Ebay Force Domain",
     "short_name": "Ebay Force Domain",
     "description": "Forces a domain for item pages on Ebay.",
-    "version": "1.1.0",
-
+    "version": "1.2.1",
     "permissions": ["tabs"],
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
-
     "icons":
     {
         "128": "images/default-128.png",
         "48": "images/default-48.png",
         "24": "images/default-24.png"
     },
-    "background": 
+    "background":
     {
         "scripts": ["background.js"]
-    }
+    },
+    "content_scripts": [
+    {
+        "matches": ["*://*.ebay.com/sch/*", "*://*.ebay.es/sch/*", "*://*.ebay.in/sch/*", "*://*.ebay.co.jp/sch/*", "*://*.ebay.fr/sch/*", "*://*.ebay.de/sch/*", "*://*.ebay.it/sch/*", "*://*.ebay.nl/sch/*", "*://*.ebay.co.uk/sch/*", "*://*.ebay.ca/sch/*", "*://*.ebay.com.mx/sch/*", "*://*.ebay.com.au/sch/*", "*://*.ebay.com.br/sch/*"],
+        "js": ["content.js"]
+    }]
 }
