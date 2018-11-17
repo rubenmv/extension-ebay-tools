@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Ebay Tools</title>
+	<link rel="stylesheet" href="popup.css" />
+	<link rel="stylesheet" href="common.css" />
+	<link rel="stylesheet" href="onoff-switch.css" />
+</head>
+
+<body>
+	<div class="caption">
+		<h1>Ebay Tools</h1>
+	</div>
+	<!-- Ocultar resultados de los paises indicados -->
+	<div class="centeredLeft">
+		<div class="section">
+			<div class="onoffswitch">
+				<input type="checkbox" id="ocultarPaisesSwitch" name="ocultarPaisesSwitch" class="onoffswitch-checkbox" checked>
+				<label class="onoffswitch-label" for="ocultarPaisesSwitch">
+					<span class="onoffswitch-inner"></span>
+					<span class="onoffswitch-switch"></span>
+				</label>
+			</div>
+			<label>Ocultar paises</label>
+		</div>
+		<div class="section">
+			<input type="text" id="ocultarPaisesText">
+		</div>
+		<div class="section">
+			<!-- Redirigir a el dominio indicado -->
+			<div class="onoffswitch">
+				<input type="checkbox" id="redirigirSwitch" name="redirigirSwitch" class="onoffswitch-checkbox" checked>
+				<label class="onoffswitch-label" for="redirigirSwitch">
+					<span class="onoffswitch-inner"></span>
+					<span class="onoffswitch-switch"></span>
+				</label>
+			</div>
+			<label>Redirigir a dominio</label>
+		</div>
+		<div class="section">
+			<input type="text" id="redirigirText">
+		</div>
+	</div>
+	<div class="section">
+		<button id="saveButton" class="btn">Guardar</button>
+		<label id="status"></label>
+	</div>
+	<script src="popup.js"></script>
+</body>
+
+</html>

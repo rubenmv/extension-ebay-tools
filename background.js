@@ -1,8 +1,9 @@
 const DEBUG = false;
-const REDIRECT_DOMAIN = "ebay.es";
-const HIDDEN_COUNTRIES = /(China|Hong Kong)/;
-
-var logger = function (message)
+var IsChecking = false;
+//const REDIRECT_DOMAIN = "ebay.es";
+var redirectDomainEnabled = false,
+    redirectDomainValue = /()/;
+var logger = function(message)
 {
     if (DEBUG) console.log(message);
 }
@@ -15,28 +16,30 @@ function CheckForDomain(url, domain)
 function Redirect(tab)
 {
     logger("-------- Redirect -------");
-
-    logger("Cogemos el tab.\n" +
-        "id: " + tab.id +
-        ", url: " + tab.url);
+    logger("Cogemos el tab.\n" + "id: " + tab.id + ", url: " + tab.url);
     // Recoge tab.url y crea en formato URL para poder extraer hostname y pathname
     var url = new URL(tab.url);
     // Primero comprobamos si ebay es parte del hostname
-    if (!CheckForDomain(url, "ebay")) { logger("dominio no ebay, terminamos"); return; }
+    if (!CheckForDomain(url, "ebay"))
+    {
+        logger("dominio no ebay, terminamos");
+        return;
+    }
     logger("tab.url en formato URL: " + url);
     if (url.href)
     {
         logger("hostname: " + url.hostname);
         // No es el dominio que buscamos, redirigimos
-        if (!CheckForDomain(url, REDIRECT_DOMAIN))
+        if (!CheckForDomain(url, redirectDomainValue))
         {
             var itemPage = url.href.indexOf("itm") >= 0;
             if (itemPage)
             {
                 logger("item page, redirecting");
-                const redirectURL = "http://" + REDIRECT_DOMAIN + url.pathname;
+                const redirectURL = "http://" + redirectDomainValue + url.pathname;
                 logger(redirectURL);
-                chrome.tabs.update(tab.id, {
+                chrome.tabs.update(tab.id,
+                {
                     url: redirectURL
                 });
             }
@@ -44,11 +47,38 @@ function Redirect(tab)
     }
 }
 
-chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab)
+function initializeOptions()
+{
+    var options = {
+        ocultarPaisesEnabled: false,
+        ocultarPaisesLista: "",
+        redirigirEnabled: false,
+        redirigirDominio: ""
+    };
+    return options;
+}
+
+function onOptionsUpdated()
+{
+    var options = initializeOptions();
+    chrome.storage.sync.get(options, function(storedSettings)
+    {
+        // Check for error
+        if (chrome.runtime.lastError !== undefined)
+        {
+            logger("An error ocurred restoring options: " + chrome.runtime.lastError);
+            return;
+        }
+        redirectDomainEnabled = storedSettings.redirigirEnabled === undefined ? true : storedSettings.redirigirEnabled;
+        redirectDomainValue = storedSettings.redirigirDominio === undefined ? "" : storedSettings.redirigirDominio;
+    });
+}
+onOptionsUpdated();
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab)
 {
     // Primero comprobamos durante la carga si el dominio hay que redirigirlo
     if (changeInfo.status === "loading")
     {
-        Redirect(tab);
+        if (redirectDomainEnabled && redirectDomainValue !== undefined && redirectDomainValue !== '') Redirect(tab);
     }
 });
