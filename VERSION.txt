@@ -1,3 +1,9 @@
+1.4.0 - 2020.04.26
+------------------
+- New icon for better visibility on both dark and light themes.
+- Adds translation disabler code from Eduard Ereza extension:
+https://chrome.google.com/webstore/detail/translation-disabler-for/nblmoonpiilkcfcckhhdaijolankohkj?hl=en
+
 1.3.0 - 2018.11.17
 ------------------
 - Rename extension to Ebay Tools.
