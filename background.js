@@ -52,6 +52,8 @@ function initializeOptions()
     var options = {
         ocultarPaisesEnabled: false,
         ocultarPaisesLista: "",
+        ocultarVendedoresEnabled: false,
+        ocultarVendedoresLista: "",
         redirigirEnabled: false,
         redirigirDominio: ""
     };

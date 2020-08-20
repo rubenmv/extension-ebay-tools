@@ -3,6 +3,7 @@
 const DEBUG = false;
 var bgPage = chrome.extension.getBackgroundPage();
 var ocultarPaisesSwitch, ocultarPaisesText,
+    ocultarVendedoresSwitch, ocultarVendedoresText,
     redirigirSwitch, redirigirText;
 var logger = function(message)
 {
@@ -18,6 +19,8 @@ function initializeOptions()
     var options = {
         ocultarPaisesEnabled: false,
         ocultarPaisesLista: "",
+        ocultarVendedoresEnabled: false,
+        ocultarVendedoresLista: "",
         redirigirEnabled: false,
         redirigirDominio: ""
     };
@@ -29,6 +32,8 @@ function onSaveClicked()
     var options = initializeOptions();
     options.ocultarPaisesEnabled = ocultarPaisesSwitch.checked;
     options.ocultarPaisesLista = ocultarPaisesText.value;
+    options.ocultarVendedoresEnabled = ocultarVendedoresSwitch.checked;
+    options.ocultarVendedoresLista = ocultarVendedoresText.value;
     options.redirigirEnabled = redirigirSwitch.checked;
     options.redirigirDominio = redirigirText.value;
     chrome.storage.sync.set(options, function()
@@ -75,6 +80,13 @@ function initialize()
         // Paises que ocultar
         ocultarPaisesText = document.getElementById("ocultarPaisesText");
         ocultarPaisesText.value = storedSettings.ocultarPaisesLista === undefined ? "" : storedSettings.ocultarPaisesLista;
+        // OCULTAR Vendedores
+        // Switch de ocultar Vendedores
+        ocultarVendedoresSwitch = document.getElementById("ocultarVendedoresSwitch");
+        ocultarVendedoresSwitch.checked = storedSettings.ocultarVendedoresEnabled === undefined ? true : storedSettings.ocultarVendedoresEnabled;
+        // Vendedores que ocultar
+        ocultarVendedoresText = document.getElementById("ocultarVendedoresText");
+        ocultarVendedoresText.value = storedSettings.ocultarVendedoresLista === undefined ? "" : storedSettings.ocultarVendedoresLista;
         // REDIRIGIR
         redirigirSwitch = document.getElementById("redirigirSwitch");
         redirigirSwitch.checked = storedSettings.redirigirEnabled === undefined ? true : storedSettings.redirigirEnabled;
