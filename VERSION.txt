@@ -1,3 +1,7 @@
+1.5.0 - 2020.08.20
+------------------
+- Option to hide sellers, same as with countries
+
 1.4.0 - 2020.04.26
 ------------------
 - New icon for better visibility on both dark and light themes.
