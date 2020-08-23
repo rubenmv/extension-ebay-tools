@@ -1,4 +1,4 @@
-const DEBUG = true;
+const DEBUG = false;
 //const HIDDEN_COUNTRIES = /(China|Hong Kong)/;
 var hiddenCountriesEnabled = false,
     hiddenCountriesValue = /()/;
