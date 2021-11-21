@@ -3,7 +3,7 @@
     "name": "Ebay Tools",
     "short_name": "Ebay Tools",
     "description": "Several tools for Ebay.",
-    "version": "1.5.1",
+    "version": "1.5.2",
     "permissions": ["tabs", "storage", "*://*.ebay.es/*", "*://*.ebay.fr/*", "*://*.ebay.it/*"],
     "content_security_policy": "script-src 'self'; object-src 'self'",
     "icons": {
