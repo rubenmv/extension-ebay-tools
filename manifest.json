@@ -5,7 +5,7 @@
     "description": "Several tools for Ebay.",
     "version": "1.5.1",
     "permissions": ["tabs", "storage", "*://*.ebay.es/*", "*://*.ebay.fr/*", "*://*.ebay.it/*"],
-    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+    "content_security_policy": "script-src 'self'; object-src 'self'",
     "icons": {
         "128": "images/default-128.png",
         "48": "images/default-48.png",
