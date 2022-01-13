@@ -38,7 +38,11 @@ function onSaveClicked()
     options.redirigirDominio = redirigirText.value;
     chrome.storage.sync.set(options, function()
     {
-        bgPage.onOptionsUpdated();
+        chrome.runtime.sendMessage({action: "onOptionsUpdated"}, function(response) {
+            console.log('Mensaje enviado para lanzar accion onOptionsUpdated');
+          });
+          
+        //bgPage.onOptionsUpdated();
         // Update status to let user know options were saved.
         var status = document.getElementById('status');
         var saveButton = document.getElementById('saveButton');
